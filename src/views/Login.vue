@@ -36,17 +36,36 @@ export default {
     };
   },
   methods: {
-    handleLogin() {
-      if (this.username === 'admin' && this.password === 'password') {
-        alert('Login successful!');
-        this.$router.push('/dashboard');
-      } else {
-        alert('Invalid username or password.');
+    async handleLogin() {
+      try {
+        const response = await fetch('/api/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: this.username,
+            password: this.password,
+          }),
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          alert(result.message); // 顯示後端返回的消息
+          this.$router.push('/dashboard'); // 登錄成功後跳轉
+        } else {
+          const error = await response.json();
+          alert(error.message || 'Invalid username or password.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
       }
     },
   },
 };
 </script>
+
 
 <style>
 html, body {

@@ -6,6 +6,8 @@ import Profile from "@/views/Profile.vue";
 import Report from "@/views/Report.vue";
 import Channels from "@/views/Channels.vue";
 import Tickets from "@/views/Tickets.vue";
+import Graphs from "@/views/Graphs.vue";
+import Text from "@/views/Text.vue";
 
 // 定义路由
 const routes = [
@@ -39,6 +41,17 @@ const routes = [
                 name: 'Tickets',
                 component: Tickets,
             },
+            {
+                path: 'Graphs',
+                name: 'Graphs',
+                component: Graphs,
+            },
+            {
+                path: 'Text', // 相对路径，完整路径为 /dashboard
+                name: 'Text',
+                component: Text,
+            }
+
         ],
 
     },
